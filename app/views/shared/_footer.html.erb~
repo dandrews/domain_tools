@@ -1,0 +1,32 @@
+<footer id="footer" class="navbar-default navbar-fixed-bottom">
+
+  <div class="row">
+
+    <div class="col-md-8 col-md-offset-2">
+      
+      <div class="container">
+
+	<p>      
+
+	  <a href="/">&copy; 2015 Slice Domains.</a>
+
+	  <a title="©2012-2015 Here Be Dragons Inc." href="http://herebedragons.net/">©2015</a> &#183;
+	  
+	  <a href="mailto:help@slicedomains.com">Feedback</a> &#183;
+
+	  <a href="/terms/">Terms</a> &#183;
+
+	  <a href="/privacy/">Privacy</a> &#183;
+
+	  <a href="/features/">Features</a> &#183;
+
+	  <a target="_blank" href="https://twitter.com/intent/follow?screen_name=SliceDomains">Follow @SliceDomains</a>
+
+	</p>
+
+      </div>
+
+    </div>
+  </div>
+  
+</footer>

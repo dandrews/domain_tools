@@ -1,0 +1,13 @@
+<%= form_tag('/search', remote: true, id: "search-form", autocomplete: "off" ) do %>
+<div class="form-group">
+  <%= text_field_tag :q, params[:q], :placeholder => 'Search', :id => "search-input", :class => "form-control", :type => "text" %>
+  <input type="submit" style="visibility:hidden;position:fixed;" />
+</div>
+<% end %>
+
+<%= javascript_tag do %>
+  $("#search-input").focus();
+  $("#search-form").keyup(function() {
+      $("#search-form").trigger('submit.rails');
+  });
+<% end %>

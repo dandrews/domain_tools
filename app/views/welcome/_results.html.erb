@@ -1,0 +1,9 @@
+<ul class="list-unstyled">
+  <% popular_tlds.each do |tld| %>
+  <li>
+    <% taken = result['tlds'].include? tld %>    
+    <%= ".#{tld}" %>&nbsp;
+    <%= render partial: "welcome/data", locals: {term: result['word'], taken: taken, tld: tld} %>
+  </li>
+  <% end %>
+</ul>

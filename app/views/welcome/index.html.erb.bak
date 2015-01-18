@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="page-header">
+      <h1>Slice Domains <small>Find The Best Domains</small></h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+
+	<div id="search-box">
+	  <%= render 'search' %>
+	</div>
+
+      </div>
+
+      <div class="col-md-8">
+	<div class="pull-right">
+	  <ul class="list-inline">
+	    <li>
+	      <h4><a href="/features/">Features</a></h4>
+	    </li>
+	    <li>
+	      <h4><a href="/about/">About</a></h4>
+	    </li>
+	    <li>
+	      <h4><a href="/faq/">FAQ</a></h4>
+	    </li>
+	  </ul>
+	</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="main">
+
+      <p><strong>Just start typing!</strong> If the domain name you are looking for is taken, you can click WHOIS to find out who registered it or the URL to visit the website.</p>
+      <p>We apply a <strong>$1.49 coupon for .com</strong> domain names when you buy at Go Daddy. The offer is valid for only one .com purchase, and does not include the ICANN fee of $0.18 per domain name per year. That’s a sweet deal!</p>
+      <p style="font-size: 1.1em"><strong>Love the site?</strong> Spread the word on <a onclick="ga('send', 'event', 'outbound', 'click', 'twitter');" href="https://twitter.com/instantdomain">Twitter</a> and <a onclick="ga('send', 'event', 'outbound', 'click', 'facebook');" href="https://www.facebook.com/InstantDomainSearch">Facebook!</a></p>
+      <p>All domain searches are encrypted over https, and searches do not leave our servers. Your search results are not recorded. Pressing Enter or Return will take you directly to Go Daddy or the registrar you’ve chosen where you can buy your domain name. Good luck!</p>
+
+    </div>    
+  </div>
+</div>  
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="row">
+      <div class="col-md-4">
+
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Popular Domains</h3>
+	  </div>
+	  <div class="panel-body" id="results-box">
+	  </div>
+	</div>
+	
+      </div>
+
+      <div class="col-md-4">
+
+	<div class="panel panel-warning">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">New Domains</h3>
+	  </div>
+	  <div class="panel-body" id="suggests-box">
+	  </div>
+	</div>
+	
+      </div>
+
+      <div class="col-md-4">      
+
+	<div class="panel panel-success">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Similar Domains</h3>
+	  </div>
+	  <div class="panel-body" id="ngram-box">
+	  </div>
+	</div>
+
+	<div class="panel panel-danger">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">WHOIS</h3>
+	  </div>
+	  <div class="panel-body" id="whois-box">
+	  </div>
+	</div>
+	
+      </div>
+
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+
+    <hr>
+    
+    <footer id="footer" class="fixed-bottom">
+
+      <p>      
+
+	<a href="/">&copy; 2015 Slice Domains.</a>
+
+	<a title="©2012-2015 Here Be Dragons Inc." href="http://herebedragons.net/">©2015</a> &#183;
+	
+	<a href="mailto:help@slicedomains.com">Feedback</a> &#183;
+
+	<a href="/terms/">Terms</a> &#183;
+
+	<a href="/privacy/">Privacy</a> &#183;
+
+	<a href="/features/">Features</a> &#183;
+
+	<a target="_blank" href="https://twitter.com/intent/follow?screen_name=SliceDomains">Follow @SliceDomains</a>
+
+      </p>	
+    </footer>
+
+  </div>
+</div>
