@@ -1,6 +1,0 @@
-<% unless taken %>
-  <%= link_to "buy", "#.#{tld}", :class => 'btn btn-link' %>
-<% else %>
-  <%= link_to "make offer", "#.#{tld}", :class => 'btn btn-link' %>
-  <%= link_to "whois", whois_path(q: "#.#{tld}"), :class => 'btn btn-link', :remote => true %>
-<% end %>
