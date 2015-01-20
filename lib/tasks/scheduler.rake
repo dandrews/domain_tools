@@ -140,42 +140,7 @@ task :load_tlds_faster => :environment do |t|
   puts "elapsed: #{minutes} minutes"
 end
 
-task :load_tlds_even_faster => :environment do |t|
-
-  m_start_time = Time.now
-  puts "Begin @ #{m_start_time}"  
-  
-  zone_files = %x{ls -S zones/*.zone}.split("\n")
-
-  %x{rm zones/master.zone}
-  %x{sort -m zones/*.zone | sort -u > zones/master.zone}
-
-  end_time = Time.now  
-  minutes = (end_time - m_start_time)/60
-  puts "elapsed: #{minutes} minutes"
-
-  master_file = 'zones/master_tlds.csv'
-  %x{rm #{master file}; touch #{master_file}}
-
-  File.foreach(master_file) do |x|
-    name = x.downcase.strip
-    tlds = []
-    zone_files.each do |zone_file|
-      result = %x{sgrep -- #{name} #{zone_file} | grep -m1 '^#{name}$'}
-      if x == result
-        zone = zone_file.gsub("zones/clean.","").gsub(".zone","")
-        tlds << zone
-      end
-    end
-    %x{ echo '#{name},{#{tlds.join('\\,')}}' >> zones/master.zone }
-  end    
-  
-end
-
-task :get_zone_files => :environment do
-  %x{cx download -s "SD" Cheetah /home/contact16/*zone.gz}
-end
-
+desc 'download the latest zone files and clean them for processing later'
 task :clean_zones => :environment do
 
   require 'csv'
@@ -196,7 +161,7 @@ task :clean_zones => :environment do
     zip_type    = zone_row[6]
     unzip_file  = outfile.gsub(".#{zip_type}","")
 
-    # step 1 cURL
+    # step 1 download the latest published zone file, using cURL
     puts("Begin FTP #{zone}") # com
     ftp_path  = "ftp://#{ftp_host}/#{file_path}" # ftp://rz.verisign-grs.com/com.zone.gz
     if system("curl -u #{username}:#{password} #{ftp_path} -o #{outfile}")
@@ -206,7 +171,7 @@ task :clean_zones => :environment do
       next
     end
 
-    # step 2 unzip
+    # step 2 unzip the file for processing
     puts("Begin gunzip #{outfile}")
     if system("gunzip #{outfile}") # com.zone.gz
       puts("Finished gunzip #{unzip_file}") # com.zone
@@ -215,7 +180,7 @@ task :clean_zones => :environment do
       next
     end
 
-    # step 3 clean
+    # step 3 run the one liner command to clean, sort, and de-dupe the file
     puts("Begin clean #{zone}, #{unzip_file}")
     cleaner    = zone_row[7]
     clean_zone = "clean.#{unzip_file}" # clean.com.zone
@@ -229,7 +194,7 @@ task :clean_zones => :environment do
       next
     end
 
-    # step 4 zip
+    # step 4 zip the file back up for storage, until the next step
     puts("Begin gzip #{zone}, #{clean_zone}")  
     if system("gzip #{clean_zone}")
       puts("Finished gzip #{zone}, #{clean_zone}.gz") # clean.com.zone.gz
@@ -243,4 +208,43 @@ task :clean_zones => :environment do
 
   end
 
+end
+
+desc 'unzip and merge all the domains into one file ( zones/master.zone ), for loading into the db'
+task :load_tlds_even_faster => :environment do |t|
+
+  m_start_time = Time.now
+  puts "Begin @ #{m_start_time}"
+
+  # TODO add a step to unzip all the files
+
+  zone_files = %x{ls -S zones/*.zone}.split("\n")
+
+  %x{rm zones/master.zone}
+  %x{sort -m zones/*.zone | sort -u > zones/master.zone}
+
+  end_time = Time.now
+  minutes = (end_time - m_start_time)/60
+  puts "elapsed: #{minutes} minutes"
+
+  master_file = 'zones/master_tlds.csv'
+  %x{rm #{master file}; touch #{master_file}}
+
+  File.foreach(master_file) do |x|
+    name = x.downcase.strip
+    tlds = []
+    zone_files.each do |zone_file|
+      result = %x{sgrep -- #{name} #{zone_file} | grep -m1 '^#{name}$'}
+      if x == result
+        zone = zone_file.gsub("zones/clean.","").gsub(".zone","")
+        tlds << zone
+      end
+    end
+    %x{ echo '#{name},{#{tlds.join('\\,')}}' >> zones/master.zone }
+  end
+
+end
+
+task :get_zone_files => :environment do
+  %x{cx download -s "SD" Cheetah /home/contact16/*zone.gz}
 end
